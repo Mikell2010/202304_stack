@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block titulo %}Recetas{% endblock %}
+
+{% block contenido %}
+{% include 'menu.html'%}
+
+<h1>Bienvenido, {{session.usuario.nombre}}</h1>
+
+<div class="row mt-5">
+    <div class="col-3"><h2>{{receta.nombre}}</h2></div>
+    <div class="col-9"><h3>Posteado por: {{receta.usuario.nombre}}</h3></div>
+</div>
+
+
+<div class="border-5">
+    <div class="row mt-3 g-3 align-items-center">
+        <div class="col-3">
+            <p>Descripción</p>
+        </div>
+        <div class="col-9">
+            <p>{{receta.descripcion}}</p>
+        </div>
+    </div>
+    <div class="row g-3 align-items-center">
+        <div class="col-3">
+            <p>Bajo los 30 Minutos?</p>
+        </div>
+        <div class="col-9">
+            <p> {% if receta.bajo_tiempo == 1 %}
+                SI
+                {% else %}
+                NO
+                {% endif %}</p>
+        </div>
+    </div>
+    <div class="row g-3 align-items-center">
+        <div class="col-3">
+            <p>Instrucciones</p>
+        </div>
+        <div class="col-9">
+            <p>{{receta.instrucciones}}</p>
+        </div>
+    </div>
+    <div class="row g-3 align-items-center">
+        <div class="col-3">
+            <p>Fecha</p>
+        </div>
+        <div class="col-9">
+            <p>{{receta.fecha_cocinado.strftime('%B, %d %Y')}}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

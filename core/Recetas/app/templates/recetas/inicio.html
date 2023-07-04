@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block titulo %}Recetas{% endblock %}
+
+{% block contenido %}
+{% include 'menu.html'%}
+
+<h1>Bienvenido, {{session.usuario.nombre}}</h1>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <th>Nombre</th>
+        <th>Bajo los 30</th>
+        <th>Creado Por</th>
+        <th>Acciones</th>
+    </thead>
+    <tbody>
+        {% for receta in recetas %}
+        <tr>
+            <td>{{receta.nombre}}</td>
+            <td>
+                {% if receta.bajo_tiempo == 1 %}
+                SI
+                {% else %}
+                NO
+                {% endif %}
+            </td>
+            <td>{{receta.usuario.nombre}}</td>
+            <td>
+                <a href="/recetas/{{receta.id}}">Ver Receta</a>
+                {% if receta.usuario_id == session.usuario.usuario_id %}
+                    <a href="/recetas/{{receta.id}}/editar">Editar</a>
+                    <a href="/recetas/{{receta.id}}/eliminar">Eliminar</a>
+                {% endif%}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
